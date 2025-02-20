@@ -1,9 +1,11 @@
 const capture = "http://localhost:3000/capture";
+const form = document.getElementById("driveForm");
 
 const app = {
   init: () => {
     displayCamera();
     takePicture();
+    addMailToDriveFolder();
   },
 
   displayCamera: () => {
@@ -30,8 +32,32 @@ const app = {
       }
     });
   },
+
+  addMailToDriveFolder: () => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const email = document.getElementById("email").value;
+
+      fetch("http://localhost:3000/add-to-drive", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Email was added !");
+            form.reset();
+          } else {
+            alert("Error adding email  : " + data.message);
+          }
+        });
+    });
+  },
 };
 
-const { displayCamera, takePicture } = app;
+const { displayCamera, takePicture, addMailToDriveFolder } = app;
 
 document.addEventListener("DOMContentLoaded", app.init);

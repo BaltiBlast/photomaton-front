@@ -4,71 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Photomaton</title>
-    <style>
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        background-color: #111;
-        color: white;
-        font-family: Arial, sans-serif;
-      }
-
-      input {
-        width: 80%;
-        max-width: 400px;
-        padding: 15px;
-        font-size: 18px;
-        text-align: center;
-        border: none;
-        border-radius: 8px;
-        margin-bottom: 20px;
-      }
-
-      video {
-        width: 80%;
-        max-width: 600px;
-        border: 5px solid white;
-        border-radius: 10px;
-      }
-
-      .spacebar {
-        margin-top: 20px;
-        font-size: 24px;
-        font-weight: bold;
-        padding: 10px 20px;
-        border-radius: 5px;
-        background: white;
-        color: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 200px;
-        height: 50px;
-        text-transform: uppercase;
-        animation: pulse 1s infinite alternate;
-      }
-
-      @keyframes pulse {
-        from {
-          transform: scale(1);
-          opacity: 0.6;
-        }
-        to {
-          transform: scale(1.1);
-          opacity: 1;
-        }
-      }
-    </style>
   </head>
   <body>
-    <input type="email" placeholder="Adresse mail pour Drive" />
-
     <video id="video" autoplay></video>
 
-    <div class="spacebar">Barre Espace</div>
+    <h1>Ajouter une adresse e-mail</h1>
+    <form id="driveForm">
+      <input type="email" id="email" placeholder="Adresse e-mail" required />
+      <button type="submit">Ajouter</button>
+    </form>
 
     <script src="./index.js"></script>
   </body>
