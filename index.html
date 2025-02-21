@@ -3,17 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <link rel="stylesheet" href="./styles.css" />
     <title>Photomaton</title>
   </head>
   <body>
-    <video id="video" autoplay></video>
+    <main class="container">
+      <form id="driveForm">
+        <p class="txt-center">
+          En ajoutant ton email, tu pourras accéder au Google Drive où les photos sont stockées 📸✨
+        </p>
 
-    <h1>Ajouter une adresse e-mail</h1>
-    <form id="driveForm">
-      <input type="email" id="email" placeholder="Adresse e-mail" required />
-      <button type="submit">Ajouter</button>
-    </form>
-
+        <fieldset class="grid">
+          <input type="email" id="email" placeholder="Adresse e-mail" required />
+          <button type="submit">Ajouter</button>
+        </fieldset>
+      </form>
+      <div class="test">
+        <video class="txt-center" id="video" autoplay></video>
+      </div>
+      <h3 class="txt-center">
+        <kbd>Appuie sur la barre espace pour prendre une photo</kbd>
+      </h3>
+    </main>
     <script src="./index.js"></script>
   </body>
 </html>
