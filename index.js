@@ -17,18 +17,44 @@ const app = {
 
   takePicture: () => {
     document.addEventListener("keydown", async (event) => {
-      try {
-        if (event.code === "Space") {
-          const response = await fetch(capture);
-          const data = await response.json();
+      if (event.code === "Space") {
+        const countdown = document.getElementById("countdown");
 
-          if (!data.imageUrl) {
-            throw new Error("L'URL de l'image est invalide !");
+        // Fonction pour afficher le décompte
+        const startCountdown = (callback) => {
+          let count = 3;
+          countdown.style.display = "block";
+          countdown.textContent = count;
+
+          const interval = setInterval(() => {
+            count--;
+            if (count > 0) {
+              countdown.textContent = count;
+            } else {
+              clearInterval(interval);
+              countdown.textContent = "📸"; // Effet flash
+              setTimeout(() => {
+                countdown.style.display = "none";
+                callback(); // Prendre la photo après le décompte
+              }, 500);
+            }
+          }, 1000);
+        };
+
+        // Lancer le décompte puis prendre la photo
+        startCountdown(async () => {
+          try {
+            const response = await fetch(capture);
+            const data = await response.json();
+
+            if (!data.imageUrl) {
+              throw new Error("L'URL de l'image est invalide !");
+            }
+            photo.src = data.imageUrl + "?t=" + new Date().getTime();
+          } catch (error) {
+            console.error("Erreur : ", error);
           }
-          photo.src = data.imageUrl + "?t=" + new Date().getTime();
-        }
-      } catch (error) {
-        console.error("Erreur : ", error);
+        });
       }
     });
   },
